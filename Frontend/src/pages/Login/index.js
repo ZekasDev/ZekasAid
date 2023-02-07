@@ -23,7 +23,7 @@ export default function Login() {
             <FiLogIn size={16} color="#01ab6d" />
             Cadastrar
           </Link>
-          <Link classname="back-link" to="/recover">
+          <Link className="back-link" to="/recover">
             <FiAlertTriangle size={16} color="#01ab6d" />
             Esqueci minha senha
           </Link>
