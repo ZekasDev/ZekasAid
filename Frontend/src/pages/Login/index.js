@@ -57,3 +57,8 @@ export default function Login() {
     </div>
   );
 }
+
+
+// FRONTEND: Substituição do 'email' para  'userId'
+// BACKEND: Verificar as rotas e controllers de 'email' para 'userId'
+// Processo de auth com login & senha

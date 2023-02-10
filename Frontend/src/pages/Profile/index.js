@@ -7,7 +7,7 @@ import api from "../../services/api";
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
-  const user_id = localStorage.getItem("user_id");
+  const email = localStorage.getItem("email");
   const ongName = localStorage.getItem("ong_name");
  
   const history = useHistory()
@@ -16,19 +16,19 @@ export default function Profile() {
     api
       .get("profile", {
         headers: {
-          Authorization: user_id,
+          Authorization: email,
         },
       })
       .then((response) => {
         setIncidents(response.data);
       });
-  }, [user_id]);
+  }, [email]);
 
   async function handleDeleteIncident(id) {
     try {
       await api.delete(`incidents/${id}`, {
         headers: {
-          Authorization: user_id,
+          Authorization: email,
         },
       });
       setIncidents(incidents.filter((incident) => incident.id !== id));
