@@ -9,17 +9,16 @@ import frontImg from "../../assets/zekasaid.jpg";
 import logoImg from "../../assets/logo.jpg";
 
 export default function Login() {
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
     try {
-      const response = await api.post("/sessions", { id });
-      console.log(response.data.name);
-
-      localStorage.setItem('ong_id', id)
+      const response = await api.post("/sessions", { email });
+      
+      localStorage.setItem('email', email)
       localStorage.setItem('ong_name', response.data.name)
 
       history.push('/profile')
@@ -35,9 +34,9 @@ export default function Login() {
         <form onSubmit={handleLogin}>
           <h1>Faça seu Login</h1>
           <input
-            placeholder="Usuário"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <input placeholder="Senha" />

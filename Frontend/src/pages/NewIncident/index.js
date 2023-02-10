@@ -9,27 +9,29 @@ export default function NewIncident() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
-  const ongId = localStorage.getItem('ongId')
+  const email = localStorage.getItem('email')
   const history = useHistory()
 
   async function handleNewIncident(e) {
     e.preventDefault()
 
     const data = {
-      data,
+      title,
       description,
       value
     }
 
     try {
+      console.log(email)
       await api.post('incidents', data, {
         headers: {
-          Authorization: ongId,
+          Authorization: email,
         }
       })
 
       history.push('/profile')
     } catch (err) {
+      console.log(err)
       alert('Erro ao cadastrar caso, tente novamente.')
     }
   }

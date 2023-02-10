@@ -7,8 +7,8 @@ import api from "../../services/api";
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
-  const ongId = localStorage.getItem("ongId");
-  const ongName = localStorage.getItem("ongName");
+  const user_id = localStorage.getItem("user_id");
+  const ongName = localStorage.getItem("ong_name");
  
   const history = useHistory()
 
@@ -16,23 +16,24 @@ export default function Profile() {
     api
       .get("profile", {
         headers: {
-          Authorization: ongId,
+          Authorization: user_id,
         },
       })
       .then((response) => {
         setIncidents(response.data);
       });
-  }, [ongId]);
+  }, [user_id]);
 
   async function handleDeleteIncident(id) {
     try {
       await api.delete(`incidents/${id}`, {
         headers: {
-          Authorization: ongId,
+          Authorization: user_id,
         },
       });
       setIncidents(incidents.filter((incident) => incident.id !== id));
     } catch (err) {
+      console.log(err)
       alert("Erro ao deletar caso, tente novamente.");
     }
   }
@@ -74,7 +75,7 @@ export default function Profile() {
                 currency: "BRL",
               }).format(incident.value)}
             </p>
-            <button onClick={() => handleDeleteIncident} type="button">
+            <button onClick={() => handleDeleteIncident(incident.id)} type="button">
               <FiTrash2 size={20} color="#a8a8b3" />
             </button>
           </li>

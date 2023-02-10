@@ -2,13 +2,18 @@ const connection = require("../database/connection");
 
 module.exports = {
   async index(request, response) {
-    const ong_id = request.headers.authorization;
+    const user_id = request.headers.authorization;
 
-    const incidents = await connection("incidents")
-      .where("ong_id", ong_id)
-      .where("ong_id", ong_id)
-      .select("*");
+    try {
+      const incidents = await connection("incidents")
+        .where("user_id", user_id)
+        .where("user_id", user_id)
+        .select("*");
 
-      return response.json(incidents)
+      return response.json(incidents);
+    } catch (err) {
+      console.log(err)
+      return response.status(404).json({ error: "Not found" });
+    }
   },
 };
